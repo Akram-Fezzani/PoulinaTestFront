@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SearchPipe } from 'app/search.pipe';
+import { CommonModule } from '@angular/common';
 
 import { TableListComponent } from './table-list.component';
 
@@ -8,7 +10,7 @@ describe('TableListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableListComponent ]
+      declarations: [ TableListComponent,SearchPipe,CommonModule ]
     })
     .compileComponents();
   }));

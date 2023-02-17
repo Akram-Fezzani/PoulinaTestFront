@@ -8,8 +8,10 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { TableListComponent } from './table-list/table-list.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { CommonModule } from '@angular/common';
+import { SearchPipe } from './search.pipe';
 
 
 @NgModule({
@@ -23,15 +25,17 @@ import { TableListComponent } from './table-list/table-list.component';
     MatSlideToggleModule,
     AppRoutingModule,
     MatPaginatorModule,
-    TableListComponent
+    CommonModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
-
   ],
-  providers: [],
+  providers: [    
+  ],
+  exports: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

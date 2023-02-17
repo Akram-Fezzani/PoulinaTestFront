@@ -1,26 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Livre } from 'app/Models/Livre';
 import { livreService } from 'app/services/Livre/livre.service';
+import { SearchPipe } from 'app/search.pipe';
+import { CommonModule } from '@angular/common';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table'
 
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
   styleUrls: ['./table-list.component.css']
 })
-export class TableListComponent implements OnInit {
-  livres:any;
+
+export class TableListComponent implements OnInit,AfterViewInit  {
+  livres: Livre[] = [];
+  dataSource!: MatTableDataSource<any>;
   data: any = [];
+  searchtext='';
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private ls:livreService, private _router:Router) { }
 
- 
+
 
   listOfLivres(){
     this.ls.listOfLivres().subscribe( (data:any) =>{
-        console.log(data);
-        this.livres=data;
+       this.dataSource = new MatTableDataSource(data);
+       console.log(this.dataSource);
+
+        return this.livres;
+
       },
-      (error:any) => console.log(error));  }
+      (error:any) => console.log(error));  
+  }
 
       ngOnInit() {
         this.listOfLivres();
@@ -37,4 +50,9 @@ export class TableListComponent implements OnInit {
           console.log(data);
         },
         (error:any) => console.log(error));  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
 }

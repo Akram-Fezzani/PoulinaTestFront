@@ -27,8 +27,8 @@ export class livreService {
     return this._http.post(this.baseURL + 'UpdateLivre/'+id,livre);
 
   }
-  listOfLivres(): Observable<any> {
-    return this._http.get(this.baseURL + 'GetLivres');
+  listOfLivres(): Observable<Livre> {
+    return this._http.get<Livre>(this.baseURL + 'GetLivres');
   }
 
   deleteLivre(livreId:number): Observable<any> {

@@ -6,7 +6,12 @@
                   <div class="card-header card-header-danger">
                       <h4 class="card-title ">Liste Des Livres</h4>
                   </div>
-
+                  <div class="col-md-2">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="search" placeholder="which book are you looking for?" [(ngModel)]="searchtext"
+                     >
+                    </mat-form-field>
+                </div>
                   <div class="card-body">
                       <div class="table-responsive">
                           <table class="table">
@@ -31,7 +36,7 @@
                                 </th>
                               </thead>
                               <tbody>
-                                  <tr *ngFor="let l of livres">
+                                  <tr *ngFor="let l of dataSource.data | search:searchtext">
                                       <td>
                                         {{l.titre}}
                                       </td>
@@ -65,7 +70,10 @@
                                   </tr>
                               </tbody>
                           </table>
-                          <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+                          <mat-paginator 
+                          [pageSizeOptions]="[5, 10, 15]"
+                          aria-label="Select page"
+                          >
                           </mat-paginator>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right" [routerLink]="['/user-profile']"> <i class="fa fa-plus" aria-hidden="true"></i>
                             Ajouter </button>
@@ -74,6 +82,7 @@
                  
               </div>
           </div>
+          
       </div>
   </div>
 </div>
